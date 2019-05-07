@@ -1,0 +1,35 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "clusterName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The PatchCluster request parameters",
+            "properties": {
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "The resource tags.",
+                    "type": "object",
+                    "nullable": true
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

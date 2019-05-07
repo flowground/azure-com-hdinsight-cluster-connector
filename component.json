@@ -1,0 +1,186 @@
+{
+    "title": "HDInsightManagementClient",
+    "description": "The HDInsight Management Client.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/hdinsight-cluster/2018-06-01-preview/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Clusters_List": {
+            "main": "./lib/actions/Clusters_List.js",
+            "title": "Lists all the HDInsight clusters under the subscription.",
+            "description": "Lists all the HDInsight clusters under the subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Clusters_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Clusters_ListByResourceGroup": {
+            "main": "./lib/actions/Clusters_ListByResourceGroup.js",
+            "title": "Lists the HDInsight clusters in a resource group.",
+            "description": "Lists the HDInsight clusters in a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Clusters_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Clusters_Delete": {
+            "main": "./lib/actions/Clusters_Delete.js",
+            "title": "Deletes the specified HDInsight cluster.",
+            "description": "Deletes the specified HDInsight cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Clusters_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Clusters_Get": {
+            "main": "./lib/actions/Clusters_Get.js",
+            "title": "Gets the specified cluster.",
+            "description": "Gets the specified cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Clusters_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Clusters_Update": {
+            "main": "./lib/actions/Clusters_Update.js",
+            "title": "Patch HDInsight cluster with the specified parameters.",
+            "description": "Patch HDInsight cluster with the specified parameters.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Clusters_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Clusters_Create": {
+            "main": "./lib/actions/Clusters_Create.js",
+            "title": "Creates a new HDInsight cluster with the specified parameters.",
+            "description": "Creates a new HDInsight cluster with the specified parameters.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Clusters_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Clusters_Resize": {
+            "main": "./lib/actions/Clusters_Resize.js",
+            "title": "Resizes the specified HDInsight cluster to the specified size.",
+            "description": "Resizes the specified HDInsight cluster to the specified size.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Clusters_Resize.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Clusters_RotateDiskEncryptionKey": {
+            "main": "./lib/actions/Clusters_RotateDiskEncryptionKey.js",
+            "title": "Rotate disk encryption key of the specified HDInsight cluster.",
+            "description": "Rotate disk encryption key of the specified HDInsight cluster.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Clusters_RotateDiskEncryptionKey.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

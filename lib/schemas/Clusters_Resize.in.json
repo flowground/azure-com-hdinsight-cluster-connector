@@ -1,0 +1,39 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "clusterName": {
+            "required": true,
+            "type": "string"
+        },
+        "roleName": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "workernode"
+            ]
+        },
+        "requestBody": {
+            "description": "The Resize Cluster request parameters.",
+            "properties": {
+                "targetInstanceCount": {
+                    "description": "The target instance count for the operation.",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

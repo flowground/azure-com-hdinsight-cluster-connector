@@ -1,0 +1,426 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "clusterName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The CreateCluster request parameters.",
+            "properties": {
+                "identity": {
+                    "description": "The identity of the cluster, if configured.",
+                    "properties": {
+                        "principalId": {
+                            "description": "The principal id of cluster identity. This property will only be provided for a system assigned identity.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "tenantId": {
+                            "description": "The tenant id associated with the cluster. This property will only be provided for a system assigned identity.",
+                            "readOnly": true,
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "The type of identity used for the cluster. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities.",
+                            "enum": [
+                                "SystemAssigned",
+                                "UserAssigned",
+                                "SystemAssigned, UserAssigned",
+                                "None"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "ResourceIdentityType"
+                            }
+                        },
+                        "userAssignedIdentities": {
+                            "additionalProperties": {
+                                "properties": {
+                                    "clientId": {
+                                        "description": "The client id of user assigned identity.",
+                                        "readOnly": true,
+                                        "type": "string"
+                                    },
+                                    "principalId": {
+                                        "description": "The principal id of user assigned identity.",
+                                        "readOnly": true,
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "description": "The list of user identities associated with the cluster. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+                            "type": "object"
+                        }
+                    },
+                    "type": "object"
+                },
+                "location": {
+                    "description": "The location of the cluster.",
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "The cluster create parameters.",
+                    "properties": {
+                        "clusterDefinition": {
+                            "description": "The cluster definition.",
+                            "properties": {
+                                "blueprint": {
+                                    "description": "The link to the blueprint.",
+                                    "type": "string"
+                                },
+                                "componentVersion": {
+                                    "additionalProperties": {
+                                        "type": "string"
+                                    },
+                                    "description": "The versions of different services in the cluster.",
+                                    "type": "object"
+                                },
+                                "configurations": {
+                                    "description": "The cluster configurations.",
+                                    "type": "object"
+                                },
+                                "kind": {
+                                    "description": "The type of cluster.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "clusterVersion": {
+                            "description": "The version of the cluster.",
+                            "type": "string"
+                        },
+                        "computeProfile": {
+                            "description": "The compute profile.",
+                            "properties": {
+                                "roles": {
+                                    "description": "The list of roles in the cluster.",
+                                    "items": {
+                                        "description": "Describes a role on the cluster.",
+                                        "properties": {
+                                            "dataDisksGroups": {
+                                                "description": "The data disks groups for the role.",
+                                                "items": {
+                                                    "description": "The data disks groups for the role.",
+                                                    "properties": {
+                                                        "diskSizeGB": {
+                                                            "description": "ReadOnly. The DiskSize in GB. Do not set this value.",
+                                                            "readOnly": true,
+                                                            "type": "integer"
+                                                        },
+                                                        "disksPerNode": {
+                                                            "description": "The number of disks per node.",
+                                                            "format": "int32",
+                                                            "type": "integer"
+                                                        },
+                                                        "storageAccountType": {
+                                                            "description": "ReadOnly. The storage account type. Do not set this value.",
+                                                            "readOnly": true,
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "hardwareProfile": {
+                                                "description": "The hardware profile.",
+                                                "properties": {
+                                                    "vmSize": {
+                                                        "description": "The size of the VM",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "minInstanceCount": {
+                                                "description": "The minimum instance count of the cluster.",
+                                                "format": "int32",
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "description": "The name of the role.",
+                                                "type": "string"
+                                            },
+                                            "osProfile": {
+                                                "description": "The operating system profile.",
+                                                "properties": {
+                                                    "linuxOperatingSystemProfile": {
+                                                        "description": "The Linux OS profile.",
+                                                        "properties": {
+                                                            "password": {
+                                                                "description": "The password.",
+                                                                "type": "string"
+                                                            },
+                                                            "sshProfile": {
+                                                                "description": "The SSH profile.",
+                                                                "properties": {
+                                                                    "publicKeys": {
+                                                                        "description": "The list of SSH public keys.",
+                                                                        "items": {
+                                                                            "description": "The SSH public key for the cluster nodes.",
+                                                                            "properties": {
+                                                                                "certificateData": {
+                                                                                    "description": "The certificate for SSH.",
+                                                                                    "type": "string"
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
+                                                                        },
+                                                                        "type": "array"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "username": {
+                                                                "description": "The username.",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "scriptActions": {
+                                                "description": "The list of script actions on the role.",
+                                                "items": {
+                                                    "description": "Describes a script action on role on the cluster.",
+                                                    "properties": {
+                                                        "name": {
+                                                            "description": "The name of the script action.",
+                                                            "type": "string"
+                                                        },
+                                                        "parameters": {
+                                                            "description": "The parameters for the script provided.",
+                                                            "type": "string"
+                                                        },
+                                                        "uri": {
+                                                            "description": "The URI to the script.",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "name",
+                                                        "uri",
+                                                        "parameters"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "targetInstanceCount": {
+                                                "description": "The instance count of the cluster.",
+                                                "format": "int32",
+                                                "type": "integer"
+                                            },
+                                            "virtualNetworkProfile": {
+                                                "description": "The virtual network profile.",
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "The ID of the virtual network.",
+                                                        "type": "string"
+                                                    },
+                                                    "subnet": {
+                                                        "description": "The name of the subnet.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "diskEncryptionProperties": {
+                            "description": "The disk encryption properties.",
+                            "properties": {
+                                "encryptionAlgorithm": {
+                                    "description": "Algorithm identifier for encryption, default RSA-OAEP.",
+                                    "enum": [
+                                        "RSA-OAEP",
+                                        "RSA-OAEP-256",
+                                        "RSA1_5"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "JsonWebKeyEncryptionAlgorithm"
+                                    }
+                                },
+                                "keyName": {
+                                    "description": "Key name that is used for enabling disk encryption.",
+                                    "type": "string"
+                                },
+                                "keyVersion": {
+                                    "description": "Specific key version that is used for enabling disk encryption.",
+                                    "type": "string"
+                                },
+                                "msiResourceId": {
+                                    "description": "Resource ID of Managed Identity that is used to access the key vault.",
+                                    "type": "string"
+                                },
+                                "vaultUri": {
+                                    "description": "Base key vault URI where the customers key is located eg. https://myvault.vault.azure.net",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "osType": {
+                            "description": "The type of operating system.",
+                            "enum": [
+                                "Windows",
+                                "Linux"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "OSType"
+                            }
+                        },
+                        "securityProfile": {
+                            "description": "The security profile.",
+                            "properties": {
+                                "aaddsResourceId": {
+                                    "description": "The resource ID of the user's Azure Active Directory Domain Service.",
+                                    "type": "string"
+                                },
+                                "clusterUsersGroupDNs": {
+                                    "description": "Optional. The Distinguished Names for cluster user groups",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "directoryType": {
+                                    "description": "The directory type.",
+                                    "enum": [
+                                        "ActiveDirectory"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": false,
+                                        "name": "DirectoryType"
+                                    }
+                                },
+                                "domain": {
+                                    "description": "The organization's active directory domain.",
+                                    "type": "string"
+                                },
+                                "domainUserPassword": {
+                                    "description": "The domain admin password.",
+                                    "format": "password",
+                                    "type": "string"
+                                },
+                                "domainUsername": {
+                                    "description": "The domain user account that will have admin privileges on the cluster.",
+                                    "type": "string"
+                                },
+                                "ldapsUrls": {
+                                    "description": "The LDAPS protocol URLs to communicate with the Active Directory.",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "msiResourceId": {
+                                    "description": "User assigned identity that has permissions to read and create cluster-related artifacts in the user's AADDS.",
+                                    "type": "string"
+                                },
+                                "organizationalUnitDN": {
+                                    "description": "The organizational unit within the Active Directory to place the cluster and service accounts.",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "storageProfile": {
+                            "description": "The storage profile.",
+                            "properties": {
+                                "storageaccounts": {
+                                    "description": "The list of storage accounts in the cluster.",
+                                    "items": {
+                                        "description": "The storage Account.",
+                                        "properties": {
+                                            "container": {
+                                                "description": "The container in the storage account, only to be specified for WASB storage accounts.",
+                                                "type": "string"
+                                            },
+                                            "fileSystem": {
+                                                "description": "The filesystem, only to be specified for Azure Data Lake Storage type Gen 2.",
+                                                "type": "string"
+                                            },
+                                            "isDefault": {
+                                                "description": "Whether or not the storage account is the default storage account.",
+                                                "type": "boolean"
+                                            },
+                                            "key": {
+                                                "description": "The storage account access key.",
+                                                "type": "string"
+                                            },
+                                            "msiResourceId": {
+                                                "description": "The managed identity (MSI) that is allowed to access the storage account, only to be specified for Azure Data Lake Storage Gen 2.",
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "description": "The name of the storage account.",
+                                                "type": "string"
+                                            },
+                                            "resourceId": {
+                                                "description": "The resource ID of storage account, only to be specified for Azure Data Lake Storage Gen 2.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "tier": {
+                            "description": "The cluster tier.",
+                            "enum": [
+                                "Standard",
+                                "Premium"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "Tier"
+                            }
+                        }
+                    }
+                },
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "The resource tags.",
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
